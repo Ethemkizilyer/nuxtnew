@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-
+import axios from "axios";
 import products from "~~/data";
 
 export const useCartStore = defineStore("cart", {

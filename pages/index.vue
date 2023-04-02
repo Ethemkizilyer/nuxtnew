@@ -65,7 +65,7 @@
             md="4"
           >
             <v-card class="mx-auto pb-2" max-width="244">
-              <v-img :src="product.image" height="200px" cover>
+              <v-img :src="product.displayIcon" height="200px" cover>
                 <template v-slot:placeholder>
                   <v-row :align="center"
   
@@ -81,10 +81,10 @@
               </v-img>
 
               <v-card-title class="text-capitalize">
-                {{ product.name }}
+                {{ product.displayName }}
               </v-card-title>
 
-              <v-card-subtitle> ${{ product.price }} </v-card-subtitle>
+              <!-- <v-card-subtitle> ${{ product.price }} </v-card-subtitle> -->
               <v-card-actions>
                 <v-btn color="primary"> Read More </v-btn>
                 <v-spacer></v-spacer>
@@ -133,7 +133,7 @@
             </v-card>
           </v-col>
         </v-row>
-        <v-row v-show="!grid" v-for="(product, i) in filteredProducts" :key="i">
+        <!-- <v-row v-show="!grid" v-for="(product, i) in filteredProducts" :key="i">
 
           <v-col cols="4">
             <v-img :src="product.image" height="200px" cover>
@@ -163,7 +163,7 @@
               </v-btn>
             </v-card-actions>
           </v-col>
-        </v-row>
+        </v-row> -->
 
         </v-col>
    
@@ -174,20 +174,30 @@
 
 <script setup>
 import data from '../data'
+import axios from 'axios'
 import {useCartStore} from '../stores/cart'
 const cartStore=useCartStore()
-const products=ref(data)
+const products=ref([])
 
 const grid =ref(true)
 const sortBy = ref("name")
 const order =ref("asending")
 const name = ref('')
 const filteredProducts= computed(()=>{
-  return [...products.value].filter((item)=>{
-    return name.value.toLocaleLowerCase().split(" ").every((v)=>item.name.toLocaleLowerCase().includes(v))
+  return products.value.filter((item)=>{
+    return name.value.toLocaleLowerCase().split(" ").every((v)=>item.displayName.toLocaleLowerCase().includes(v))
   })
 })
-
+onMounted(() => {
+      axios.get('https://valorant-api.com/v1/agents')
+        .then(response => {
+          products.value = response.data.data
+          console.log(response.data.data)
+        })
+        .catch(error => {
+          console.error(error)
+        })
+    })
 
 </script>
 
