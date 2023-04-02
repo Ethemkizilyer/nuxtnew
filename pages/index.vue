@@ -6,36 +6,7 @@
         <v-col cols="12" md="2">
           <v-card class="py-2 px-3">
             <v-text-field placeholder="Search Product..." v-model="name"></v-text-field>
-             <v-radio-group v-model="sortBy">
-      <template v-slot:label>
-    <h3>Sort By:</h3>
-      </template>
-      <v-radio value="name">
-        <template v-slot:label>
-          <div>By <strong class="text-success">Name</strong></div>
-        </template>
-      </v-radio>
-      <v-radio value="price">
-        <template v-slot:label>
-          <div>By <strong class="text-primary">Price</strong></div>
-        </template>
-      </v-radio>
-    </v-radio-group>
-             <v-radio-group v-model="order">
-      <template v-slot:label>
-    <h3>Sorting Order:</h3>
-      </template>
-      <v-radio value="asending">
-        <template v-slot:label>
-          <div>By <strong class="text-success">Asending</strong></div>
-        </template>
-      </v-radio>
-      <v-radio value="deasending">
-        <template v-slot:label>
-          <div>By <strong class="text-primary">Deasending</strong></div>
-        </template>
-      </v-radio>
-    </v-radio-group>
+ 
           </v-card>
         </v-col>
       
@@ -88,7 +59,7 @@
               <v-card-actions>
                 <v-btn color="primary"> Read More </v-btn>
                 <v-spacer></v-spacer>
-                <v-btn class="bg-primary" @click="cartStore.add(product.id)">
+                <v-btn class="bg-primary" @click="cartStore.add(product.uuid)">
                   Add to Cart
                 </v-btn>
   
@@ -189,6 +160,7 @@ const filteredProducts= computed(()=>{
   })
 })
 onMounted(() => {
+  cartStore.fetchProducts()
       axios.get('https://valorant-api.com/v1/agents')
         .then(response => {
           products.value = response.data.data
