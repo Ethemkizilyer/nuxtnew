@@ -5,7 +5,7 @@
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-btn @click="$router.push('/Cart')" class="text-none" stacked>
-      <v-badge :content="cartStore.productsTotal" color="error">
+      <v-badge :content="cartStore.formattedCart.length" color="error">
         <v-icon> mdi-cart-outline </v-icon>
       </v-badge>
     </v-btn>
