@@ -45,7 +45,7 @@
         </v-btn>
       </v-app-bar>
       <v-row>
-        <v-col cols="12" md="12">
+        <v-col cols="12" >
           <v-row class="ml-1 mb-2 mt-1">
             <v-btn @click="grid = !grid" :class="{ 'bg-primary': grid }">
               <v-icon> mdi-view-list </v-icon>
@@ -61,7 +61,7 @@
           <v-row v-show="grid">
             <v-col v-for="(product, i) in filteredProducts" :key="i">
               <v-card
-                style="position: relative"
+                style="position: relative;background:#DC3D4B;"
                 class="pb-2"
                 max-width="270"
                 max-height="300"
@@ -135,6 +135,8 @@
             v-show="!grid"
             v-for="(product, i) in filteredProducts"
             :key="i"
+            class="my-4"
+            style="background:#DC3D4B;"
           >
             <v-col cols="4">
               <v-img
@@ -157,7 +159,7 @@
                 </template>
               </v-img>
             </v-col>
-            <v-col cols="8" md="8">
+            <v-col  cols="8" md="8">
               <v-card-title class="text-capitalize">
                 {{ product.displayName }}
               </v-card-title>

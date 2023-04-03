@@ -56,7 +56,9 @@
               <div
                 v-for="item in filteredProducts"
                 :key="item.uuid"
-                class="mb-3"
+                class="mb-3 my-4 px-4"
+                
+            style="background:#DC3D4B;"
               >
                 <v-row>
                   <v-col sm="2">
