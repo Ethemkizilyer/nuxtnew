@@ -234,14 +234,10 @@ function showDetails(index) {
 }
 .icon {
   z-index: 9999999999;
-
   width: 25px;
   height: 25px;
 }
-@font-face {
-  font-family: "Valorant Font";
-  src: url("static/fonts/ValorantFont.ttf") format("truetype");
-}
+
 
 .valorant-font {
   font-family: "Valorant Font";
