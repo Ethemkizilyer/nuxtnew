@@ -37,12 +37,10 @@
               cover
             >
               <v-card
-                style="
-                  background: rgba(0, 0, 0, 0.5);
+                style="background: rgba(0, 0, 0, 0.5);
                   position: absolute;
                   bottom: 3rem;
-                  color: white;
-                "
+                  color: white;"
               >
                 <v-img :src="item?.displayIcon" height="100"></v-img>
                 <v-card-title>

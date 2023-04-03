@@ -62,7 +62,7 @@
                   <v-col sm="2">
                     <div class="d-flex align-center no-wrap">
                       <img
-                        style="width: 90px; height: 90px; object-fit: cover"
+                        style="max-width: 200px"
                         :src="item.displayIcon"
                       />
                       <h3 class="text-capitalize ml-3">
