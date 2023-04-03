@@ -44,7 +44,7 @@
                   color: white;
                 "
               >
-                <v-img :src="item.displayIcon" height="100"></v-img>
+                <v-img :src="item?.displayIcon" height="100"></v-img>
                 <v-card-title>
                   <h2>{{ item.slot }}</h2>
                 </v-card-title>
@@ -83,7 +83,6 @@ onMounted(() => {
     .get("https://valorant-api.com/v1/agents/" + route.params.uuid)
     .then((response) => {
       products.value = response.data.data;
-      console.log(response.data.data);
     })
     .catch((error) => {
       console.error(error);
