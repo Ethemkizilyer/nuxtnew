@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-// import products from "~~/data";
 
 export const useCartStore = defineStore("cart", {
   state: () => ({
@@ -20,11 +19,7 @@ export const useCartStore = defineStore("cart", {
             .displayName,
           description: this.products.find((p) => p.uuid === product.productId)
             .description,
-          // price: products.find((p) => p.uuid === product.productId).price,
           quantity: product.quantity,
-          // cost:
-          //   product.quantity *
-          //   products.find((p) => p.id === product.productId).price,
         };
       });
     },
@@ -56,17 +51,10 @@ export const useCartStore = defineStore("cart", {
       }
     },
     add(productId) {
-      if (this.cartContent.hasOwnProperty(productId)) {
-        this.cartContent[productId] = {
-          productId,
-          quantity: this.cartContent[productId].quantity + 1,
-        };
-      } else {
         this.cartContent[productId] = {
           productId,
           quantity: 1,
         };
-      }
     },
     remove(productId) {
       if (!this.cartContent[productId]) {
@@ -82,7 +70,6 @@ export const useCartStore = defineStore("cart", {
       delete this.cartContent[productId];
     },
     toogleTheme() {
-      console.log(this.theme);
       this.theme = this.theme === "light" ? "dark" : "light";
     },
   },

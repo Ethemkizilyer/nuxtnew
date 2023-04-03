@@ -1,17 +1,51 @@
 <template>
   <v-main class="bg-grey-lighten-2">
     <v-container fluid>
-      <v-row>
-        <v-col cols="12" md="2">
-          <v-card class="py-2 px-3">
-            <v-text-field
-              placeholder="Search Product..."
-              v-model="name"
-            ></v-text-field>
-          </v-card>
-        </v-col>
+      <v-app-bar style="background: #dc3d4b; color: white">
+        <v-toolbar-title
+          class="valorant-font"
+          style="cursor: pointer"
+          @click="$router.push('/')"
+        >
+          VMW
+        </v-toolbar-title>
+        <v-spacer></v-spacer>
 
-        <v-col cols="12" md="10">
+        <v-card class="mx-auto" color="transparent" width="400">
+          <v-card-text>
+            <v-text-field
+              v-model="name"
+              density="compact"
+              variant="solo"
+              label="Search agent"
+              append-inner-icon="mdi-magnify"
+              single-line
+              hide-details
+              @click:append-inner="onClick"
+              bg-color="transparent"
+              style="border: 2px solid white; border-radius: 5px; color: white"
+            ></v-text-field>
+          </v-card-text>
+        </v-card>
+
+        <v-btn @click="$router.push('/saved')" class="text-none" stacked>
+          <v-badge :content="cartStore.formattedCart.length" color="error">
+            <span
+              style="font-size: 32px"
+              class="mdi mdi-card-account-details-star-outline"
+            ></span>
+          </v-badge>
+        </v-btn>
+        <v-btn
+          @click="cartStore.toogleTheme"
+          :prepend-icon="
+            theme == 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'
+          "
+        >
+        </v-btn>
+      </v-app-bar>
+      <v-row>
+        <v-col cols="12" md="12">
           <v-row class="ml-1 mb-2 mt-1">
             <v-btn @click="grid = !grid" :class="{ 'bg-primary': grid }">
               <v-icon> mdi-view-list </v-icon>
@@ -25,30 +59,24 @@
             </v-btn>
           </v-row>
           <v-row v-show="grid">
-            <v-col
-              v-for="(product, i) in filteredProducts"
-              :key="i"
-              cols="12"
-              lg="3"
-              sm="4"
-              md="4"
-            >
+            <v-col v-for="(product, i) in filteredProducts" :key="i">
               <v-card
                 style="position: relative"
-                class="mx-auto pb-2"
-                max-width="244"
+                class="pb-2"
+                max-width="270"
+                max-height="300"
               >
                 <v-card-title
                   style="
                     display: flex;
                     justify-content: center;
-                    font-weight: bold;"
-                  
+                    font-weight: bold;
+                  "
                   class="text-capitalize"
                 >
                   {{ product.displayName }}
                 </v-card-title>
-                <v-img @click="$router.push(`/agent/${product.uuid}`)" :src="product.displayIcon" height="200px" cover
+                <v-img :src="product.displayIcon" height="200px" cover
                   ><v-card-text
                     :align="center"
                     justify="center"
@@ -76,6 +104,12 @@
                 </v-img>
 
                 <v-card-actions>
+                  <v-btn
+                    class="bg-info"
+                    @click="$router.push(`/agent/${product.uuid}`)"
+                  >
+                    Detail
+                  </v-btn>
                   <v-spacer></v-spacer>
                   <v-btn
                     class="bg-primary"
@@ -88,11 +122,9 @@
             </v-col>
             <v-col v-if="filteredProducts.length == 0" :key="i" cols="12">
               <v-card class="mx-auto pb-2">
-                <v-card-title class="text-capitalize">
-                  Burası Boş
-                </v-card-title>
+                <v-card-title class="text-capitalize"> Empty </v-card-title>
 
-                <v-card-subtitle>Burası</v-card-subtitle>
+                <v-card-subtitle>Card</v-card-subtitle>
                 <v-card-actions>
                   <v-spacer></v-spacer>
                 </v-card-actions>
@@ -105,7 +137,12 @@
             :key="i"
           >
             <v-col cols="4">
-              <v-img :src="product.displayIcon" height="200px" cover>
+              <v-img
+                @click="$router.push(`/agent/${product.uuid}`)"
+                :src="product.displayIcon"
+                height="200px"
+                cover
+              >
                 <template v-slot:placeholder>
                   <v-row
                     :align="center"
@@ -145,7 +182,6 @@
 </template>
 
 <script setup>
-import data from "../data";
 import axios from "axios";
 import { useCartStore } from "../stores/cart";
 const cartStore = useCartStore();
@@ -201,5 +237,14 @@ function showDetails(index) {
 
   width: 25px;
   height: 25px;
+}
+@font-face {
+  font-family: "Valorant Font";
+  src: url("static/fonts/ValorantFont.ttf") format("truetype");
+}
+
+.valorant-font {
+  font-family: "Valorant Font";
+  font-weight: bold;
 }
 </style>
