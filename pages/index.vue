@@ -62,9 +62,9 @@
             <v-col v-for="(product, i) in filteredProducts" :key="i">
               <v-card
                 style="position: relative;background:#DC3D4B;"
-                class="pb-2"
-                max-width="270"
-                max-height="300"
+                class="pb-2 mx-auto"
+                width="296"
+                height="400"
               >
                 <v-card-title
                   style="
@@ -76,7 +76,7 @@
                 >
                   {{ product.displayName }}
                 </v-card-title>
-                <v-img :src="product.displayIcon" height="200px" cover
+                <v-img :src="product.displayIcon" height="70%" class="mb-4 mx-auto" cover
                   ><v-card-text
                     :align="center"
                     justify="center"
@@ -232,7 +232,7 @@ function showDetails(index) {
   margin-left: 12px;
   color: rgb(240, 234, 234);
   transition: 1000;
-  height: 190px;
+  height: 260px;
 }
 .icon {
   z-index: 9999999999;
